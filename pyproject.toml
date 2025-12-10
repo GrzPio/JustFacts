@@ -1,8 +1,8 @@
 [project]
 name = "justfacts"
 version = "0.1.0"
-description = "JustFacts using crewAI"
-authors = [{ name = "Your Name", email = "you@example.com" }]
+description = "AI tool for news aggregation, summarising and fact-checking"
+authors = [{ name = "Grzegorz Piotrowski", email = "grzegorz.piotrowski.001@student.uni.lu" }, { name = "Velija Delikj", email = "velija.delikj.001@student.uni.lu" }]
 requires-python = ">=3.10,<3.14"
 dependencies = [
     "crewai[tools]==1.7.0"
