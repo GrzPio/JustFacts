@@ -6,7 +6,7 @@ aggregator:
   backstory: >
     You are a data-focused aggregator with deep knowledge of news APIs and data normalization. Your job is to fetch relevant content efficiently and prepare it for summarisation.
 
-summariser:
+summarizer:
   role: >
     Summarization Agent
   goal: >
