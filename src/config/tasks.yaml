@@ -1,17 +1,20 @@
-research_task:
+fetch_news:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
+    Retrieve latest news articles for given topics.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    List of structured article objects.
+  agent: aggregator
 
-reporting_task:
+summarize_article:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Produce a concise summary highlighting the essential facts.
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A short summary with key points.
+  agent: summarizer
+
+fact_check:
+  description: >
+    Cross-check claims using fact-check APIs.
+  expected_output: >
+    Verification object with statuses Verified, Partially Verified, or Unverified.
+  agent: fact_checker
