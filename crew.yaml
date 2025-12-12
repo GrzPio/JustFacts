@@ -1,0 +1,30 @@
+name: justfacts_crew
+description: >
+  Multi-agent workflow for aggregating, summarizing, and fact-checking news articles, providing quick insights with verification.
+
+agents:
+  - aggregator
+  - summarizer
+  - fact_checker
+
+tasks:
+  - fetch_news
+  - summarize_article
+  - fact_check
+
+process:
+  flow:
+    - task: fetch_news
+      agent: aggregator
+      output: articles
+    - task: summarize_article
+      agent: summarizer
+      input: articles
+      output: summaries
+    - task: fact_check
+      agent: fact_checker
+      input: summaries
+      output: verified_summaries
+
+outputs:
+  - verified_summaries
