@@ -6,7 +6,7 @@ class SummarizerTool(BaseTool):
     Tool for summarizing a list of news articles into concise key points.
     """
 
-    name = "summarize_article"
+    name = "article_summarizer"
 
     def _run(self, articles: list):
         """
