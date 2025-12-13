@@ -1,0 +1,7 @@
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+.container { max-width: 900px; margin: 40px auto; padding: 0 16px; }
+.row { display: flex; gap: 10px; margin: 16px 0; }
+input { flex: 1; padding: 10px; font-size: 16px; }
+button { padding: 10px 14px; font-size: 16px; cursor: pointer; }
+.status { margin: 12px 0; color: #333; }
+.output { background: #f6f6f6; padding: 16px; border-radius: 8px; white-space: pre-wrap; }
