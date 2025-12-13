@@ -1,34 +1,39 @@
 import os
 import requests
-from crewai import tool
+from crewai_tools import BaseTool
 
-NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 
-@tool("fetch_news")
-def fetch_news(topic: str) -> str:
-    """Fetches recent news articles on a given topic via NewsAPI."""
-    if not NEWS_API_KEY:
-        return "Missing NEWS_API_KEY environment variable."
+class NewsAPITool(BaseTool):
+    name = "fetch_news"
+    description = "Fetches recent news articles for a given topic using NewsAPI"
 
-    url = "https://newsapi.org/v2/everything"
-    params = {
-        "q": topic,
-        "language": "en",
-        "pageSize": 3,
-        "apiKey": NEWS_API_KEY
-    }
+    def _run(self, topic: str) -> list[dict]:
+        NEWS_API_KEY = os.getenv("NEWS_API_KEY")
+        if not NEWS_API_KEY:
+            raise RuntimeError("Missing NEWS_API_KEY environment variable.")
 
-    response = requests.get(url, params=params, timeout=10)
-    response.raise_for_status()
-    articles = response.json().get("articles", [])
+        url = "https://newsapi.org/v2/everything"
+        params = {
+            "q": topic,
+            "language": "en",
+            "pageSize": 3,
+            "apiKey": NEWS_API_KEY
+        }
 
-    if not articles:
-        return "No articles found."
+        response = requests.get(url, params=params, timeout=10)
+        response.raise_for_status()
 
-    text = ""
-    for article in articles:
-        title = article.get("title", "")
-        description = article.get("description", "")
-        text += f"TITLE: {title}\nDESCRIPTION: {description}\n\n"
+        articles = response.json().get("articles", [])
 
-    return text
+        results = []
+        for idx, article in enumerate(articles):
+            results.append({
+                "id": f"newsapi-{idx}",
+                "title": article.get("title"),
+                "content": article.get("content") or article.get("description")
+                "source": article.get("source", {}).get("name"),
+                "url": article.get("url"),
+                "publication_date": article.get("publishedAt"),
+            })
+
+        return results
