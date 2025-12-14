@@ -47,6 +47,8 @@ btn.addEventListener("click", async () => {
 	  </b>
 	  <div>Sources: ${claim.source.join(", ")}</div>
 	`;
+	claimEl.classList.add("claim", verdict.toLowerCase().replace(" ", ""));
+
 	articleEl.appendChild(claimEl);
       });
 
