@@ -15,7 +15,7 @@ class FactCheckTool(BaseTool):
         results = []
         for claim in claims:
             data = self._query_api(claim, FACTCHECK_API_KEY)
-            results.append(self._parse_response(claim, data)
+            results.append(self._parse_response(claim, data))
 
         return results
 
