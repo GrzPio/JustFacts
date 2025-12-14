@@ -1,20 +1,48 @@
 fetch_news:
   description: >
-    Retrieve latest news articles for given topics.
+    Retrieve latest news articles for the given topic. Return ONLY valid JSON. Do not include commentary.
   expected_output: >
-    List of structured article objects.
+    List of article objects in JSON format:
+    [
+      {
+        "id": string,
+        "title": string,
+        "content": string,
+        "source": string,
+        "url": string,
+        "publication_date": string
+      }
+    ]
   agent: aggregator
 
 summarize_article:
   description: >
-    Produce a concise summary highlighting the essential facts.
+    For each article, produce a concise summary and extract atomic factual claims.
+    Return ONLY valid JSON. Do not include explanations.
   expected_output: >
-    A short summary with key points.
+    JSON object:
+    {
+      "article_id": string,
+      "summary": string (max 120 words),
+      "key_claims": [
+        string (each entry must be a single, verifiable factual statement)
+      ]
+    }
   agent: summarizer
 
 fact_check:
   description: >
-    Cross-check claims using fact-check APIs.
+    Verify each factual claim using fact-checking sources.
+    Return ONLY valid JSON. Do not include commentary.
   expected_output: >
-    Verification object with statuses Verified, Partially Verified, or Unverified.
+    List of verification results in JSON format:
+    [
+      {
+        "claim": string,
+        "verdict": "verified" | "unverified" | "partially_verified",
+        "sources": [
+          string
+        ]
+      }
+    ]
   agent: fact_checker
