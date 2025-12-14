@@ -1,12 +1,8 @@
 from flask import Flask, request, jsonify, render_template
 from dotenv import load_dotenv
+from src.justfacts.crew import Justfacts
 
 load_dotenv()
-
-# Import your existing pipeline pieces
-from src.crew.agents import build_agents
-from src.crew.tasks import build_tasks
-from crewai import Crew
 
 app = Flask(__name__)
 
@@ -20,20 +16,12 @@ def run_pipeline():
     if not topic:
         return jsonify({"error": "Missing topic parameter"}), 400
 
-    news_agent, summarization_agent, fact_checking_agent = build_agents()
-    tasks = build_tasks(topic, news_agent, summarization_agent, fact_checking_agent)
-
-    crew = Crew(
-        agents=[news_agent, summarization_agent, fact_checking_agent],
-        tasks=tasks
-    )
-
-    # Crew output is usually a big text blob. Return it as-is first (simple).
-    result_text = crew.run()
+    crew = Justfacts().crew()
+    result = crew.run(inputs={"topic": topic})
 
     return jsonify({
         "topic": topic,
-        "result": str(result_text)
+        "result": result
     })
 
 if __name__ == "__main__":
