@@ -1,0 +1,27 @@
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+.container { max-width: 900px; margin: 40px auto; padding: 0 16px; }
+.row { display: flex; gap: 10px; margin: 16px 0; }
+input { flex: 1; padding: 10px; font-size: 16px; }
+button { padding: 10px 14px; font-size: 16px; cursor: pointer; }
+.status { margin: 12px 0; color: #333; }
+.output { background: #f6f6f6; padding: 16px; border-radius: 8px; }
+.article {
+  background: white;
+  padding: 12px 14px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.article h2 {
+  margin-top: 0;
+}
+
+.claim {
+  margin-top: 8px;
+  padding-left: 8px;
+  border-left: 4px solid #ccc;
+}
+.claim.verified { border-color: green; }
+.claim.partialy_verified { border-color: orange; }
+.claim.unverified { border-color: red; }
