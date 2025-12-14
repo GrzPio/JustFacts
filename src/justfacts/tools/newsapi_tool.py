@@ -30,7 +30,7 @@ class NewsAPITool(BaseTool):
             results.append({
                 "id": f"newsapi-{idx}",
                 "title": article.get("title"),
-                "content": article.get("content") or article.get("description")
+                "content": article.get("content") or article.get("description"),
                 "source": article.get("source", {}).get("name"),
                 "url": article.get("url"),
                 "publication_date": article.get("publishedAt"),
