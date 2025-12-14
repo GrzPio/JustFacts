@@ -4,8 +4,8 @@ from crewai.tools import BaseTool
 
 
 class NewsAPITool(BaseTool):
-    name = "fetch_news"
-    description = "Fetches recent news articles for a given topic using NewsAPI"
+    name: str = "fetch_news"
+    description: str = "Fetches recent news articles for a given topic using NewsAPI"
 
     def _run(self, topic: str) -> list[dict]:
         NEWS_API_KEY = os.getenv("NEWS_API_KEY")

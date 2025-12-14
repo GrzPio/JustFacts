@@ -4,8 +4,8 @@ from crewai.tools import BaseTool
 
 
 class FactCheckTool(BaseTool):
-    name = "fact_check"
-    description = "Verifies claims made in news articles using Google Fact-check API"
+    name: str = "fact_check"
+    description: str = "Verifies claims made in news articles using Google Fact-check API"
 
     def _run(self, claims: list[str]) -> dict:
         FACTCHECK_API_KEY = os.getenv("FACTCHECK_API_KEY")
