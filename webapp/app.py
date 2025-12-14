@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 from dotenv import load_dotenv
-from src.justfacts.crew import Justfacts
+from justfacts.crew import Justfacts
 
 load_dotenv()
 
