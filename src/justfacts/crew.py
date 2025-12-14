@@ -1,8 +1,8 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from typing import List
-from tools.factcheck_tool import FactCheckTool
-from tools.newsapi_tool import NewsAPITool
+from justfacts.tools.factcheck_tool import FactCheckTool
+from justfacts.tools.newsapi_tool import NewsAPITool
 
 
 @CrewBase
