@@ -23,6 +23,8 @@ summarize_article:
     JSON object:
     {
       "article_id": string,
+      "title": string,
+      "url": string,
       "summary": string (max 120 words),
       "key_claims": [
         string (each entry must be a single, verifiable factual statement)
@@ -38,10 +40,18 @@ fact_check:
     List of verification results in JSON format:
     [
       {
-        "claim": string,
-        "verdict": "verified" | "unverified" | "partially_verified",
-        "sources": [
-          string
+        "article_id": string,
+        "title": string,
+        "url": string,
+        "summary": string,
+        "claims": [
+          {
+            "claim": string,
+            "verdict": "verified" | "unverified" | "partially_verified",
+            "sources": [
+               string
+            ]
+          }
         ]
       }
     ]
