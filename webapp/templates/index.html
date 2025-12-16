@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>JustFacts - News Aggregator and Verifier</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>JustFacts</h1>
+
+      <div class="row">
+        <input id="topic" type="text" placeholder="Enter a topic (e.g., elections, AI, climate)..." />
+        <button id="runBtn">Fetch & Check</button>
+      </div>
+
+      <div id="status" class="status"></div>
+
+      <pre id="output" class="output"></pre>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+[project]
+name = "justfacts"
+version = "0.1.0"
+description = "AI tool for news aggregation, summarising and fact-checking"
+authors = [{ name = "Grzegorz Piotrowski", email = "grzegorz.piotrowski.001@student.uni.lu" }, { name = "Velija Delikj", email = "velija.delikj.001@student.uni.lu" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]==1.7.0",
+    "flask>=2.3,<3.0",
+    "python-dotenv>=1.0",
+    "requests>=2.31",
+    "pydantic>=2.1"
+]
+
+[project.scripts]
+justfacts = "justfacts.main:run"
+run_crew = "justfacts.main:run"
+train = "justfacts.main:train"
+replay = "justfacts.main:replay"
+test = "justfacts.main:test"
+run_with_trigger = "justfacts.main:run_with_trigger"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
