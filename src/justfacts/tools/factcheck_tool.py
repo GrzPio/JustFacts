@@ -23,7 +23,7 @@ class FactCheckTool(BaseTool):
         url = "https://factchecktools.googleapis.com/v1alpha1/claims:search"
         params = {
             "query": claim,
-            "key": FACTCHECK_API_KEY
+            "key": api_key
         }
 
         response = requests.get(url, params=params, timeout=10)
