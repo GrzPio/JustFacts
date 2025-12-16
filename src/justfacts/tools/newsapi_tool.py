@@ -1,11 +1,11 @@
 import os
 import requests
-from crewai_tools import BaseTool
+from crewai.tools import BaseTool
 
 
 class NewsAPITool(BaseTool):
-    name = "fetch_news"
-    description = "Fetches recent news articles for a given topic using NewsAPI"
+    name: str = "fetch_news"
+    description: str = "Fetches recent news articles for a given topic using NewsAPI"
 
     def _run(self, topic: str) -> list[dict]:
         NEWS_API_KEY = os.getenv("NEWS_API_KEY")
@@ -30,7 +30,7 @@ class NewsAPITool(BaseTool):
             results.append({
                 "id": f"newsapi-{idx}",
                 "title": article.get("title"),
-                "content": article.get("content") or article.get("description")
+                "content": article.get("content") or article.get("description"),
                 "source": article.get("source", {}).get("name"),
                 "url": article.get("url"),
                 "publication_date": article.get("publishedAt"),

@@ -30,12 +30,12 @@ btn.addEventListener("click", async () => {
     }
 
     statusEl.textContent = `Done for topic: ${data.topic}`;
-    outputEl.textContent = data.result;
     data.result.forEach(article => {
       const articleEl = document.createElement("div");
+      articleEl.classList.add("article");
       
       articleEl.innerHTML = `
-        <h2>${article.title}</h2>
+        <h2><a href="${article.url}" target="_blank">${article.title}</a></h2>
 	<p>${article.summary}</p>
       `;
 
@@ -43,11 +43,11 @@ btn.addEventListener("click", async () => {
         const claimEl = document.createElement("div");
 	claimEl.innerHTML = `
 	  <b style="color:${getVerdictColor(claim.verdict)}">
-	    ${claim.text} - ${claim.verdict}
+	    ${claim.claim} - ${claim.verdict}
 	  </b>
-	  <div>Sources: ${claim.source.join(", ")}</div>
+	  <div>Sources: ${claim.sources.join(", ")}</div>
 	`;
-	claimEl.classList.add("claim", verdict.toLowerCase().replace(" ", ""));
+	claimEl.classList.add("claim", claim.verdict.toLowerCase().replace(" ", ""));
 
 	articleEl.appendChild(claimEl);
       });

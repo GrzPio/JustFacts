@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from dotenv import load_dotenv
-from src.justfacts.crew import Justfacts
+from justfacts.crew import Justfacts
+import json
 
 load_dotenv()
 
@@ -17,11 +18,13 @@ def run_pipeline():
         return jsonify({"error": "Missing topic parameter"}), 400
 
     crew = Justfacts().crew()
-    result = crew.run(inputs={"topic": topic})
+    result = crew.kickoff(inputs={"topic": topic})
+
+    result_json = json.loads(result.raw)
 
     return jsonify({
         "topic": topic,
-        "result": result
+        "result": result_json
     })
 
 if __name__ == "__main__":

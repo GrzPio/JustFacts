@@ -1,11 +1,11 @@
 import os
 import requests
-from crewai_tools import BaseTool
+from crewai.tools import BaseTool
 
 
 class FactCheckTool(BaseTool):
-    name = "fact_check"
-    description = "Verifies claims made in news articles using Google Fact-check API"
+    name: str = "fact_check"
+    description: str = "Verifies claims made in news articles using Google Fact-check API"
 
     def _run(self, claims: list[str]) -> dict:
         FACTCHECK_API_KEY = os.getenv("FACTCHECK_API_KEY")
@@ -15,7 +15,7 @@ class FactCheckTool(BaseTool):
         results = []
         for claim in claims:
             data = self._query_api(claim, FACTCHECK_API_KEY)
-            results.append(self._parse_response(claim, data)
+            results.append(self._parse_response(claim, data))
 
         return results
 
@@ -23,7 +23,7 @@ class FactCheckTool(BaseTool):
         url = "https://factchecktools.googleapis.com/v1alpha1/claims:search"
         params = {
             "query": claim,
-            "key": FACTCHECK_API_KEY
+            "key": api_key
         }
 
         response = requests.get(url, params=params, timeout=10)
