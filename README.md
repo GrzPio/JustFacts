@@ -1,6 +1,6 @@
 # Justfacts Crew
 
-Welcome to the Justfacts Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+Welcome to the Justfacts Crew project, powered by [crewAI](https://crewai.com). The webapp fetches recent news for the given topic, summarizes the news articles, and checks the major claims against fact=checking sources.
 
 ## Installation
 
@@ -13,42 +13,27 @@ pip install uv
 ```
 
 Next, navigate to your project directory and install the dependencies:
+```bash
+uv sync
+```
 
 (Optional) Lock the dependencies and install them by using the CLI command:
 ```bash
 crewai install
 ```
-### Customizing
+### Configuration
 
-**Add your `OPENAI_API_KEY` into the `.env` file**
+**Add your `OPENAI_API_KEY`, API key for NewsAPI `NEWS_API_KEY`, and Google Fact Checking API `FACTCHECK_API_KEY` into the `.env` file**
 
-- Modify `src/justfacts/config/agents.yaml` to define your agents
-- Modify `src/justfacts/config/tasks.yaml` to define your tasks
-- Modify `src/justfacts/crew.py` to add your own logic, tools and specific args
-- Modify `src/justfacts/main.py` to add custom inputs for your agents and tasks
 
-## Running the Project
+## Running the Application
 
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
-
+To run the application, activate your python environment
 ```bash
-$ crewai run
+source venv/bin/activate
 ```
-
-This command initializes the JustFacts Crew, assembling the agents and assigning them tasks as defined in your configuration.
-
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
-
-## Understanding Your Crew
-
-The JustFacts Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
-
-## Support
-
-For support, questions, or feedback regarding the Justfacts Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
-
-Let's create wonders together with the power and simplicity of crewAI.
+and run the application by
+```bash
+python3 webapp/app.py
+```
+The command line interface will output a link to access the webapp.
