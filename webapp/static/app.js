@@ -47,10 +47,13 @@ btn.addEventListener("click", async () => {
 	  const a = document.createElement("a");
 	  a.href = source.url;
 	  a.target = "_blank";
-	  a.textContent = source.name;
+	  a.rel = "noopener noreferrer";
+	  a.textContent = source.name || source.url;
 	  sourcesEl.appendChild(a);
-	  sourcesEl.appendChild(document.createTextNode(" "));
+	  sourcesEl.appendChild(document.createTextNode(" | "));
 	});
+
+	if (sourcesEl.lastChild) sourcesEl.removeChild(sourcesEl.lastChild);
 
 	claimEl.appendChild(sourcesEl);
 
