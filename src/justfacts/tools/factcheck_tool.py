@@ -36,7 +36,7 @@ class FactCheckTool(BaseTool):
         if not claims_data:
             return {
                 "claim": claim,
-                "verdict": "unverified",
+                "reviews": [],
                 "sources": []
             }
 
