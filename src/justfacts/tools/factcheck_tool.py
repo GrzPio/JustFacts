@@ -44,7 +44,7 @@ class FactCheckTool(BaseTool):
         source = []
 
         for claim in claims_data:
-            for review in claim.get("claimReview", []):
+            for review in claim.get("claimReview", [])[:3]:
                 review_text = review.get("textualRating", "unverified")
                 review_texts.append(review_text)
 
