@@ -31,29 +31,28 @@ class FactCheckTool(BaseTool):
 
         return response.json()
 
-    def _parse_response(self, claim: str, data: dict) -> dict:
+    def _parse_response(self, claim_text: str, data: dict) -> dict:
         claims_data = data.get("claims", [])
         if not claims_data:
             return {
-                "claim": claim,
-                "reviews": [],
-                "sources": []
+                "claim": claim_text,
+                "reviews": []
             }
 
-        review_texts = []
-        source = []
-
-        for claim in claims_data:
-            for review in claim.get("claimReview", [])[:3]:
-                review_text = review.get("textualRating", "unverified")
-                review_texts.append(review_text)
-
-                sources.append(review.get("publisher", {}).get("name", "unknown"))
-
+        # Take the best-fitting claim
+        best_claim = claims_data[0]
+        reviews = []
+        
+        # Parse reviews limited to 3 reviews
+        for review in best_claim.get("claimReview", [])[:3]:
+            reviews.append({
+                "text": review.get("textualRating", "unverified"),
+                "source": review.get("publisher", {}).get("name", "unknown"),
+                "url": review.get("url", "")
+            })
         
         return {
-            "claim": claim,
-            "reviews": review_texts,
-            "sources": sources
+            "claim": claim_text,
+            "reviews": reviews
         }
 
