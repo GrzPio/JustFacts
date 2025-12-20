@@ -40,21 +40,20 @@ class FactCheckTool(BaseTool):
                 "sources": []
             }
 
-        review = claims_data[0].get("claimReview", [{}])[0]
-        rating = review.get("textualRating", "Unverified")
-        source = review.get("publisher", {}).get("name", "Unknown")
+        review_texts = []
+        source = []
 
+        for claim in claims_data:
+            for review in claim.get("claimReview", []):
+                review_text = review.get("textualRating", "unverified")
+                review_texts.append(review_text)
+
+                sources.append(review.get("publisher", {}).get("name", "unknown"))
+
+        
         return {
             "claim": claim,
-            "verdict": self._map_rating(rating),
-            "sources": [source]
+            "reviews": review_texts,
+            "sources": sources
         }
 
-
-    def _map_rating(self, rating: str) -> str:
-        rating_lower = rating.lower()
-        if "true" in rating_lower:
-            return "verified"
-        if "mixed" in rating_lower or "partly" in rating_lower:
-            return "partially_verified"
-        return "unverified"
