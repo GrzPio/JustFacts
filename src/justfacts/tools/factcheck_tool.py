@@ -31,30 +31,28 @@ class FactCheckTool(BaseTool):
 
         return response.json()
 
-    def _parse_response(self, claim: str, data: dict) -> dict:
+    def _parse_response(self, claim_text: str, data: dict) -> dict:
         claims_data = data.get("claims", [])
         if not claims_data:
             return {
-                "claim": claim,
-                "verdict": "unverified",
-                "sources": []
+                "claim": claim_text,
+                "reviews": []
             }
 
-        review = claims_data[0].get("claimReview", [{}])[0]
-        rating = review.get("textualRating", "Unverified")
-        source = review.get("publisher", {}).get("name", "Unknown")
-
+        # Take the best-fitting claim
+        best_claim = claims_data[0]
+        reviews = []
+        
+        # Parse reviews limited to 3 reviews
+        for review in best_claim.get("claimReview", [])[:3]:
+            reviews.append({
+                "text": review.get("textualRating", "unverified"),
+                "source": review.get("publisher", {}).get("name", "unknown"),
+                "url": review.get("url", "")
+            })
+        
         return {
-            "claim": claim,
-            "verdict": self._map_rating(rating),
-            "sources": [source]
+            "claim": claim_text,
+            "reviews": reviews
         }
 
-
-    def _map_rating(self, rating: str) -> str:
-        rating_lower = rating.lower()
-        if "true" in rating_lower:
-            return "verified"
-        if "mixed" in rating_lower or "partly" in rating_lower:
-            return "partially_verified"
-        return "unverified"

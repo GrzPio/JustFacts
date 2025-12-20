@@ -5,7 +5,7 @@ input { flex: 1; padding: 10px; font-size: 16px; }
 button { padding: 10px 14px; font-size: 16px; cursor: pointer; }
 .status { margin: 8px 0; color: #333; }
 .output { background: #f6f6f6; padding: 12px; border-radius: 8px; min-width: 0; }
-.article, .article h2, .article p, .claim {
+.article, .article h2, .article p, .claim-text {
   overflow-wrap: break-word;
   word-break: break-word;
   white-space: normal;
@@ -38,6 +38,16 @@ button { padding: 10px 14px; font-size: 16px; cursor: pointer; }
   padding-left: 8px;
   border-left: 4px solid #ccc;
 }
+.claim a {
+  text-decoration: none;
+}
+.claim a:hover {
+  text-decoration: underline;
+}
 .claim.verified { border-color: green; }
 .claim.partially_verified { border-color: orange; }
 .claim.unverified { border-color: red; }
+
+.claim-text.verified { color: green; }
+.claim-text.partially_verified { color: orange; }
+.claim-text.unverified { color: red; }
