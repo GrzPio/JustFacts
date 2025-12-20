@@ -49,7 +49,10 @@ fact_check:
             "claim": string,
             "verdict": "verified" | "unverified" | "partially_verified",
             "sources": [
-               string
+              {
+                "name": string,
+                "url": string
+              }
             ]
           }
         ]
