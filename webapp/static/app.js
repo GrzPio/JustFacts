@@ -3,12 +3,6 @@ const topicInput = document.getElementById("topic");
 const statusEl = document.getElementById("status");
 const outputEl = document.getElementById("output");
 
-function getVerdictColor(verdict) {
-  if (verdict == "verified") return "green";
-  if (verdict == "partially_verified") return "orange";
-  if (verdict == "unverified") return "red";
-  return "black";
-}
 
 btn.addEventListener("click", async () => {
   const topic = topicInput.value.trim();
@@ -41,13 +35,24 @@ btn.addEventListener("click", async () => {
 
       article.claims.forEach(claim => {
         const claimEl = document.createElement("div");
-	claimEl.innerHTML = `
-	  <b style="color:${getVerdictColor(claim.verdict)}">
-	    ${claim.claim} - ${claim.verdict}
-	  </b>
-	  <div>Sources: ${claim.sources.join(", ")}</div>
-	`;
 	claimEl.classList.add("claim", claim.verdict.toLowerCase().replace(" ", ""));
+
+	const claimText = document.createElement("b");
+	claimText.classList.add("claim-text", claim.verdict.toLowerCase().replace(" ", ""));
+	claimText.textContent = `${claim.claim} - ${claim.verdict}`;
+	claimEl.appendChild(claimText);
+
+	const sourcesEl = document.createElement("div");
+	claim.sources.forEach(source => {
+	  const a = document.createElement("a");
+	  a.href = source.url;
+	  a.target = "_blank";
+	  a.textContent = source.name;
+	  sourcesEl.appendChild(a);
+	  sourcesEl.appendChild(document.createTextNode(" "));
+	});
+
+	claimEl.appendChild(sourcesEl);
 
 	articleEl.appendChild(claimEl);
       });
